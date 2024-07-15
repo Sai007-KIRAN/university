@@ -9,5 +9,5 @@ import java.util.*;
 @Repository
 public interface ProfessorJpaRepository extends JpaRepository<Professor, Integer> {
 
-    List<Course> findByArtist(Course course);
+    Course findByArtist(Course course);
 }

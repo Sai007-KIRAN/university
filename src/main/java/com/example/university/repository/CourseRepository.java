@@ -15,7 +15,7 @@ public interface CourseRepository {
 
     Course UpdateCourse(int courseId, Course course);
 
-    Course deleteCourse(int courseId);
+    void deleteCourse(int courseId);
 
     Professor getProfessorCourse(int courseId);
 

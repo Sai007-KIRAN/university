@@ -10,13 +10,13 @@ import com.example.university.model.*;
 public interface StudentRepository {
     ArrayList<Student> getAllStudent();
 
-    Student getStudentById(int StudentId);
+    Student getStudentById(int studentId);
 
     Student getAddStudent(Student student);
 
-    Student getUpdateStudent(int StudentId, Student student);
+    Student getUpdateStudent(int studentId, Student student);
 
-    Student getDeleteStudent(int StudentId);
+    void getDeleteStudent(int studentId);
 
-    List<Course> getCourseStudent(int StudentId);
+    List<Course> getCourseStudent(int studentId);
 }
