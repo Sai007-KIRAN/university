@@ -17,7 +17,7 @@ public class Course {
     private String courseName;
 
     @Column(name = "credits")
-    private String credits;
+    private int credits;
 
     @ManyToOne
     @JoinColumn(name = "professorid")
@@ -47,11 +47,11 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getCredits() {
+    public int getCredits() {
         return credits;
     }
 
-    public void setCredits(String credits) {
+    public void setCredits(int credits) {
         this.credits = credits;
     }
 
