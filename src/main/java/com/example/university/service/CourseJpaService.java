@@ -54,27 +54,27 @@ public class CourseJpaService implements CourseRepository {
 
     @Override
     public Course UpdateCourse(int courseId, Course course) {
-        try{
+        try {
             Course newCourse = CJR.findById(courseId).get();
-            if(course.getCourseName() != null){
+            if (course.getCourseName() != null) {
                 newCourse.setCourseName(course.getCourseName());
             }
-            if(course.getCredits() != null){
+            if (course.getCredits() != null) { // updated
                 newCourse.setCredits(course.getCredits());
             }
-            if(course.getProfessor() != null){
+            if (course.getProfessor() != null) {
                 Professor prof = course.getProfessor();
                 int pId = prof.getProfessorId();
                 Professor complete = PJR.findById(pId).get();
                 newCourse.setProfessor(complete);
             }
-            if(course.getStudents() != null){
-                List<Integer> coursesIds = new ArrayList<>(); 
-                for(Student student : course.getStudents()){
+            if (course.getStudents() != null) {
+                List<Integer> coursesIds = new ArrayList<>();
+                for (Student student : course.getStudents()) {
                     coursesIds.add(student.getStudentId());
                 }
                 List<Student> students = SJR.findAllById(coursesIds);
-                if(students.size() != coursesIds.size()){
+                if (students.size() != coursesIds.size()) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
                 }
                 newCourse.setStudents(students);

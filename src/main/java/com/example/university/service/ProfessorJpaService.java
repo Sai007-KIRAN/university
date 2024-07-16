@@ -52,7 +52,8 @@ public class ProfessorJpaService implements ProfessorRepository {
             if (professor.getDepartment() != null) {
                 newProf.setDepartment(professor.getDepartment());
             }
-
+            PJR.save(newProf);
+            return newProf;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

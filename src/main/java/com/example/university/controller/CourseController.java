@@ -46,6 +46,6 @@ public class CourseController {
 
     @GetMapping("/courses/{courseId}/students")
     public List<Student> getStudentProfessor(@PathVariable("courseId") int courseId){
-        return CJS.getStudentProfessor(courseId)
+        return CJS.getStudentProfessor(courseId);
     }
 }

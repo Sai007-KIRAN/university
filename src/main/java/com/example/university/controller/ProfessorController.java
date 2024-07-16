@@ -39,6 +39,6 @@ public class ProfessorController {
 
     @GetMapping("/professors/{professorId}/courses")
     public List<Course> getCourseProfessor(@PathVariable("professorId") int professorId){
-        return PJS.getCourseProfessor(professorId)
+        return PJS.getCourseProfessor(professorId);
     }
 }
