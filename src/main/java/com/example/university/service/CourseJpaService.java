@@ -59,7 +59,7 @@ public class CourseJpaService implements CourseRepository {
             if (course.getCourseName() != null) {
                 newCourse.setCourseName(course.getCourseName());
             }
-            if (course.getCredits() >= 0) {
+            if (course.getCredits() != 0) {
                 newCourse.setCredits(course.getCredits());
             }
             if (course.getProfessor() != null) {
@@ -98,8 +98,8 @@ public class CourseJpaService implements CourseRepository {
     @Override
     public Professor getProfessorCourse(int courseId) {
         try {
-            Professor professor = CJR.findById(courseId).get();
-            return PJR.findByArtist(professor);
+            Course course = CJR.findById(courseId).get();
+            return course.getProfessor();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
