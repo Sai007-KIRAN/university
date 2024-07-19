@@ -9,5 +9,4 @@ import java.util.*;
 @Repository
 public interface ProfessorJpaRepository extends JpaRepository<Professor, Integer> {
 
-    Course findByArtist(Course course);
 }

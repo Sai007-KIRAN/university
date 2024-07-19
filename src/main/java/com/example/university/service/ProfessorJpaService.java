@@ -73,7 +73,7 @@ public class ProfessorJpaService implements ProfessorRepository {
     public List<Course> getCourseProfessor(int professorId) {
         try {
             Professor view = PJR.findById(professorId).get();
-            return CJR.findByCourse(view);
+            return CJR.findByProfessor(view);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
