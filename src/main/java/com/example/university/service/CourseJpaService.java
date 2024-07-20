@@ -87,10 +87,24 @@ public class CourseJpaService implements CourseRepository {
 
     @Override
     public void deleteCourse(int courseId) {
+        // try {
+        // CJR.deleteById(courseId);
+        // } catch (Exception e) {
+        // throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        // }
+        // throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        // }
+
         try {
+            Course course = CJR.findById(courseId).get();
+            List<Student> students = course.getStudents();
+            for (Student student : students) {
+                student.getCourses().remove(course);
+            }
+            SJR.saveAll(students);
             CJR.deleteById(courseId);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "courseId " + courseId + " not found");
         }
         throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }

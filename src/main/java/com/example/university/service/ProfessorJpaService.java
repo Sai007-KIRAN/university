@@ -62,10 +62,24 @@ public class ProfessorJpaService implements ProfessorRepository {
 
     @Override
     public void deleteProfessor(int professorId) {
+        // try {
+        // PJR.deleteById(professorId);
+        // } catch (Exception e) {
+        // throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        // }
+        // throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        // }
+
         try {
+            Professor professor = PJR.findById(professorId).get();
+            List<Course> courses = CJR.findByProfessor(professor);
+            for (Course course : courses) {
+                course.setProfessor(null);
+            }
+            CJR.saveAll(courses);
             PJR.deleteById(professorId);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "professorId " + professorId + " not found");
         }
         throw new ResponseStatusException(HttpStatus.NO_CONTENT);
     }
