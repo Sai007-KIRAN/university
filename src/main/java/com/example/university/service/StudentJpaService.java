@@ -37,19 +37,30 @@ public class StudentJpaService implements StudentRepository {
 
     @Override
     public Student getAddStudent(Student student) {
+        // List<Integer> courseId = new ArrayList<>();
+        // for (Course course : student.getCourses()) {
+        // courseId.add(course.getCourseId());
+        // }
+        // List<Course> courses = CJR.findAllById(courseId);
+        // student.setCourses(courses);
+
+        // for (Course course : courses) {
+        // course.getStudents().add(student);
+        // }
+        // Student stud = SJR.save(student);
+        // CJR.saveAll(courses);
+        // return stud;
         List<Integer> courseId = new ArrayList<>();
         for (Course course : student.getCourses()) {
             courseId.add(course.getCourseId());
         }
         List<Course> courses = CJR.findAllById(courseId);
-        student.setCourses(courses);
-
-        for (Course course : courses) {
-            course.getStudents().add(student);
+        if (courses.size() != courseId.size()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        Student stud = SJR.save(student);
-        CJR.saveAll(courses);
-        return stud;
+        student.setCourses(courses);
+        return SJR.save(student);
+
     }
 
     @Override
@@ -63,21 +74,31 @@ public class StudentJpaService implements StudentRepository {
                 newStudent.setEmail(student.getEmail());
             }
             if (student.getCourses() != null) {
-                List<Course> courses = newStudent.getCourses();
-                for (Course course : courses) {
-                    course.getStudents().remove(newStudent);
-                }
-                CJR.saveAll(courses);
-                List<Integer> pId = new ArrayList<>();
+                // List<Course> courses = newStudent.getCourses();
+                // for (Course course : courses) {
+                // course.getStudents().remove(newStudent);
+                // }
+                // CJR.saveAll(courses);
+                // List<Integer> pId = new ArrayList<>();
+                // for (Course course : student.getCourses()) {
+                // pId.add(course.getCourseId());
+                // }
+                // List<Course> newCourse = CJR.findAllById(pId);
+                // for (Course course : newCourse) {
+                // course.getStudents().add(newStudent);
+                // }
+                // CJR.saveAll(newCourse);
+                // newStudent.setCourses(newCourse);
+                // }
+                List<Integer> courseId = new ArrayList<>();
                 for (Course course : student.getCourses()) {
-                    pId.add(course.getCourseId());
+                    courseId.add(course.getCourseId());
                 }
-                List<Course> newCourse = CJR.findAllById(pId);
-                for (Course course : newCourse) {
-                    course.getStudents().add(newStudent);
+                List<Course> courses = CJR.findAllById(courseId);
+                if (courses.size() != courseId.size()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
                 }
-                CJR.saveAll(newCourse);
-                newStudent.setCourses(newCourse);
+                newStudent.setCourses(courses);
             }
             return SJR.save(newStudent);
         } catch (Exception e) {
