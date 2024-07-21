@@ -1,22 +1,51 @@
+// package com.example.university.repository;
+
+// import java.util.*;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.stereotype.Repository;
+
+// import com.example.university.model.*;
+
+// @Repository
+// public interface StudentRepository {
+//     ArrayList<Student> getAllStudent();
+
+//     Student getStudentById(int studentId);
+
+//     Student getAddStudent(Student student);
+
+//     Student getUpdateStudent(int studentId, Student student);
+
+//     void getDeleteStudent(int studentId);
+
+//     List<Course> getCourseStudent(int studentId);
+// }
+
 package com.example.university.repository;
 
-import java.util.*;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import com.example.university.model.*;
+import com.example.university.model.Course;
+import com.example.university.model.Student;
 
-@Repository
+
+import java.util.List;
+
+
 public interface StudentRepository {
-    ArrayList<Student> getAllStudent();
+    List<Student> getStudents();
+
 
     Student getStudentById(int studentId);
 
-    Student getAddStudent(Student student);
 
-    Student getUpdateStudent(int studentId, Student student);
+    Student addStudent(Student studentId);
 
-    void getDeleteStudent(int studentId);
 
-    List<Course> getCourseStudent(int studentId);
+    Student updateStudent(int studentId, Student student);
+
+
+    void deleteStudent(int studentId);
+
+
+    List<Course> getStudentCourses(int studentId);
 }
